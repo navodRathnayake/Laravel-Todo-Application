@@ -17,4 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[HomeController::class,'index'])->name('home');
 
-Route::get('/todo',[TodoController::class,'index'])->name('todo');
+Route::prefix('/todo')->group(function (){
+    Route::get('/',[ToDoController::class,'index'])->name('todo');
+    Route::post('/store',[ToDoController::class,'store'])->name('todo.store');
+    Route::get('/{task_id}/delete',[ToDoController::class,'delete'])->name('todo.delete');
+    Route::get('/{task_id}/update',[ToDoController::class,'update'])->name('todo.update');
+});
